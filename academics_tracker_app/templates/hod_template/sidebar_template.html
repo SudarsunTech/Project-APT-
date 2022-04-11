@@ -1,0 +1,95 @@
+{% load static %}
+
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+      <a href="{% url 'admin_home' %}" class="brand-link">
+        <img src="{% static 'dist/img/AdminLTELogo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8">
+        <span class="brand-text font-weight-light"> Academics Tracker</span>
+      </a>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+
+            <li class="nav-item">
+              {% url 'admin_home' as admin_home %}
+              <a href="{{ admin_home }}" class="nav-link {% if request.path == admin_home %} active {% endif %}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Home
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              {% url 'manage_exam' as manage_exam %}
+              {% url 'edit_exam' exam_id=id as edit_exam %}
+              <a href="{{ manage_exam }}" class="nav-link {% if request.path == manage_exam %} active {% endif %} {% if request.path == edit_exam %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                <p>
+                  Exams/Assignments
+                </p>
+              </a>
+            </li>
+            
+            
+
+            <li class="nav-item">
+              {% url 'manage_course' as manage_course %}
+              {% url 'edit_course' course_id=id as edit_course %}
+              <a href="{{ manage_course }}" class="nav-link {% if request.path == manage_course %} active {% endif %} {% if request.path == edit_course %} active {% endif %}">
+                <i class="nav-icon fas fa-chalkboard"></i>
+                <p>
+                 Courses
+                </p>
+              </a>
+            </li>
+
+            
+
+            <li class="nav-item">
+              {% url 'manage_subject' as manage_subject %}
+              {% url 'edit_subject' subject_id=id as edit_subject %}
+              <a href="{{ manage_subject }}" class="nav-link {% if request.path == manage_subject %} active {% endif %} {% if request.path == edit_subject %} active {% endif %}">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                 Subjects
+                </p>
+              </a>
+            </li>
+
+           
+
+
+            <li class="nav-item">
+              {% url 'manage_session' as manage_session %}
+              {% url 'edit_session' session_id=id as edit_session %}
+              <a href="{{ manage_session }}" class="nav-link {% if request.path == manage_session %} active {% endif %} {% if request.path == edit_session %} active {% endif %}">
+                <i class="nav-icon fas fa-graduation-cap"></i>
+                <p>
+                  Sessions 
+                </p>
+              </a>
+            </li>
+
+
+
+	  <li class="nav-item">
+              {% url 'show_summary' as show_summary %}
+              <a href="{{ show_summary}}" class="nav-link {% if request.path == show_summary %} active {% endif %}">
+                <i class="nav-icon fas fa-chart-pie"></i>
+                <p>
+                  Performance Summary 
+                </p>
+              </a>
+            </li>
+            
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>

@@ -1,0 +1,106 @@
+{% extends 'hod_template/base_template.html' %}
+
+{% block page_title %}
+    Edit Subject 
+{% endblock page_title %}
+
+{% block main_content %}
+
+{% load static %}
+
+<section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Subject</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form role="form" method="POST" action="{% url 'edit_subject_save' %}">
+                        {% csrf_token %}
+
+                        
+                                {% comment %} Display Messages {% endcomment %}
+                                {% if messages %}
+                                <div class="form-group">
+                                <div class="col-12">
+                                    {% for message in messages %}
+                                    {% if message.tags == "error" %}
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% elif message.tags == "success" %}
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="margin-top: 10px;">
+                                        {{ message }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </div>
+                                {% endif %}
+                            
+
+                        <div class="card-body">
+                      
+                            <div class="form-group">
+                                <label>Course </label>
+                                <select class="form-control" name="course">
+                                    {% for course in courses %}
+                                        <option value="{{ course.id }}" {% if course.id == subject.course_id.id %} selected {% endif %}>{{ course.course_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Exam </label>
+                                <select class="form-control" name="exam">
+                                    {% for exam in exams %}
+                                        <option value="{{ exam.id }}" {% if exam.id == subject.exam_id.id %} selected {% endif %}>{{ exam.exam_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                                <input type="hidden" name="subject_id" value="{{ subject.id }}" />
+                            </div>
+
+			<div class="form-group">
+                                <label>Subject Name </label>
+                                <input type="text" class="form-control" name="subject" value="{{ subject.subject_name }}">
+                            </div>
+
+			<div class="form-group">
+                                <label>Marks Scored</label>
+                                <input type="text" class="form-control" name="marks" value="{{ subject.marks_scored }}">
+                            </div>
+
+
+		
+                        </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                        
+                        <button type="submit" class="btn btn-primary">Update Subject</button>
+                        </div>
+                    </form>
+                    </div>
+		<br>
+		<a class="btn btn-primary" href="{% url 'manage_subject' %}" role="button">Back</a> <br/>&nbsp;
+                    <!-- /.card -->
+
+                </div>
+            </div>
+
+        </div><!-- /.container-fluid -->
+      </section>
+
+  {% endblock main_content %}
